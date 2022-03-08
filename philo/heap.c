@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 15:20:00 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/08 16:23:13 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/08 17:04:28 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,8 @@ int	free_and_error(t_data *data)
 
 void	free_structures(t_data *data)
 {
-	if (data->nb_philo)
-	{
-		if (data->philo)
-			free(data->philo);
-		if (data->fork)
-			free(data->fork);
-	}
+	if (data->philo)
+		free(data->philo);
+	if (data->fork)
+		free(data->fork);
 }
