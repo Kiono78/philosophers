@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 11:46:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/08 13:20:23 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:19:43 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,11 @@ int	retrieve_data(t_data *data, char **av)
 		data->nb_meals = 0;
 	data->philo = ft_calloc(data->nb_philo, sizeof(t_philo));
 	data->fork = ft_calloc(data->nb_philo, sizeof(pthread_mutex_t));
-	data->nb_meals_mutex = ft_calloc(data->nb_philo, sizeof(pthread_mutex_t));
 	if (!data->philo || !data->fork)
 		return (free_and_error(data));
 	i = 0;
 	while (i++ < data->nb_philo)
-	{
 		pthread_mutex_init(&data->fork[i], NULL);
-		pthread_mutex_init(&data->nb_meals_mutex[i], NULL);
-	}
 	data->start_ms = get_time();
 	data->kill_switch = 0;
 	pthread_mutex_init(&data->switch_mutex, NULL);

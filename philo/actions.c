@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 09:38:32 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/08 13:18:53 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:22:45 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ void	eating(t_philo *philo)
 	philo->last_feast = get_time();
 	if (print_action(philo, EATING))
 		return ;
-	pthread_mutex_lock(&philo->data->nb_meals_mutex[philo->id - 1]);
 	philo->nb_of_meals++;
-	pthread_mutex_unlock(&philo->data->nb_meals_mutex[philo->id - 1]);
 	custom_usleep(philo->data->time_to_eat, philo);
 }
 

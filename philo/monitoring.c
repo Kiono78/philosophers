@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 10:39:16 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/08 13:18:15 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:26:53 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ int	thread_end(t_philo *philo)
 	return (0);
 }
 
-void	is_philo_full(t_data *data, int i)
-{
-	pthread_mutex_lock(&data->nb_meals_mutex[i]);
-	if (data->philo[i].nb_of_meals >= data->nb_meals && data->nb_meals != 0)
-		data->full_philo++;
-	pthread_mutex_unlock(&data->nb_meals_mutex[i]);
-}
-
 void	activate_kill_switch(t_data *data)
 {
 	pthread_mutex_lock(&data->switch_mutex);
@@ -43,13 +35,15 @@ int	someone_died(t_data *data)
 {
 	int	i;
 
-	while (1)
+	while (data->kill_switch == 0)
 	{
 		data->full_philo = 0;
 		i = -1;
 		while (++i < data->nb_philo)
 		{
-			is_philo_full(data, i);
+			if (data->philo[i].nb_of_meals >= data->nb_meals
+				&& data->nb_meals != 0)
+				data->full_philo++;
 			if (data->full_philo == data->nb_philo)
 			{
 				activate_kill_switch(data);
@@ -62,8 +56,6 @@ int	someone_died(t_data *data)
 				break ;
 			}
 		}
-		if (data->kill_switch)
-			break ;
 	}
 	return (0);
 }

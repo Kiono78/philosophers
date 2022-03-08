@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:50:50 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/08 13:36:25 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:51:27 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ void	*routine(void *param)
 
 	philo = (t_philo *)param;
 	if ((philo->id % 2) == 0)
+	{
+		philo->time = get_time();
+		print_action(philo, THINKING);
 		usleep(philo->data->time_to_eat * 1000);
+	}
 	picking_up(philo);
 	return (NULL);
 }
@@ -44,7 +48,6 @@ int	manage_thread(t_data *data)
 		if (pthread_join(data->philo[i].thread, NULL) != 0)
 			return (free_and_error(data));
 		pthread_mutex_destroy(&data->fork[i]);
-		pthread_mutex_destroy(&data->nb_meals_mutex[i]);
 		i++;
 	}
 	pthread_mutex_destroy(&data->switch_mutex);

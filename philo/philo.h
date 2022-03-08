@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:57:27 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/08 15:15:31 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:21:08 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_data
 	int				full_philo;
 	int				kill_switch;
 	pthread_mutex_t	switch_mutex;
-	pthread_mutex_t	*nb_meals_mutex;
 }	t_data;
 
 //// PHILO ////
@@ -89,6 +88,7 @@ void		thinking(t_philo *philo);
 
 int			someone_died(t_data *data);
 int			thread_end(t_philo *philo);
+void		activate_kill_switch(t_data *data);
 
 //// HEAP ////
 

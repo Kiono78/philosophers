@@ -6,7 +6,7 @@
 #    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 11:30:47 by bterral           #+#    #+#              #
-#    Updated: 2022/03/08 12:48:33 by bterral          ###   ########.fr        #
+#    Updated: 2022/03/08 16:31:03 by bterral          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,6 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
-re: fclean clean
+re: fclean all
 
 .PHONY: all clean fclean re

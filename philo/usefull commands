@@ -1,2 +1,2 @@
-How many times philosophers ate:
-	grep "is eating" test.txt | awk  '{print "meals for philo",$2}' | sort | uniq -c
+How many times philosophers have eaten:
+	grep "is eating" test.txt | awk  '{print "meals for philo",$2}' | sort | uniq -c | sort -nk5
