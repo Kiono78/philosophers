@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 14:09:30 by bterral           #+#    #+#             */
-/*   Updated: 2022/02/24 13:56:29 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/08 13:21:12 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,8 @@ int	error_figures(char **nbs)
 	return (0);
 }
 
-int parsing_error(int ac, char **av)
+int	parsing_error(int ac, char **av)
 {
-	//nb philo > 1 smtg else to add ?
 	if (ac != 5 && ac != 6)
 	{
 		printf("5 or 6 arguments needed !\n");
