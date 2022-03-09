@@ -6,16 +6,33 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 11:46:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/08 16:19:43 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/09 13:19:13 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	retrieve_data(t_data *data, char **av)
+int	initialize_mutex(t_data *data)
 {
 	int	i;
 
+	i = 0;
+	while (i++ < data->nb_philo)
+	{
+		if (pthread_mutex_init(&data->fork[i], NULL) != 0)
+			return (free_and_error(data));
+		if (pthread_mutex_init(&data->meal_mutex[i], NULL) != 0)
+			return (free_and_error(data));
+		if (pthread_mutex_init(&data->feast_mutex[i], NULL) != 0)
+			return (free_and_error(data));
+	}
+	if (pthread_mutex_init(&data->switch_mutex, NULL) != 0)
+		return (free_and_error(data));
+	return (0);
+}
+
+int	retrieve_data(t_data *data, char **av)
+{
 	data->nb_philo = ft_atoi(av[1]);
 	data->time_to_die = ft_atol(av[2]);
 	data->time_to_eat = ft_atol(av[3]);
@@ -26,14 +43,13 @@ int	retrieve_data(t_data *data, char **av)
 		data->nb_meals = 0;
 	data->philo = ft_calloc(data->nb_philo, sizeof(t_philo));
 	data->fork = ft_calloc(data->nb_philo, sizeof(pthread_mutex_t));
+	data->meal_mutex = ft_calloc(data->nb_philo, sizeof(pthread_mutex_t));
+	data->feast_mutex = ft_calloc(data->nb_philo, sizeof(pthread_mutex_t));
 	if (!data->philo || !data->fork)
 		return (free_and_error(data));
-	i = 0;
-	while (i++ < data->nb_philo)
-		pthread_mutex_init(&data->fork[i], NULL);
 	data->start_ms = get_time();
 	data->kill_switch = 0;
-	pthread_mutex_init(&data->switch_mutex, NULL);
+	initialize_mutex(data);
 	return (0);
 }
 
@@ -45,4 +61,6 @@ void	init_philo(t_philo *philo, t_data *data, int i)
 	philo->right_fork = &data->fork[i];
 	philo->left_fork = &data->fork[philo->id % data->nb_philo];
 	philo->data = data;
+	philo->meal_mutex = &data->meal_mutex[i];
+	philo->feast_mutex = &data->feast_mutex[i];
 }

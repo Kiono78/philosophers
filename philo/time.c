@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 14:03:33 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/08 15:15:48 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/09 13:37:14 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,11 @@ void	custom_usleep(uint64_t input_time, t_philo *philo)
 		else
 			usleep(100);
 	}
+}
+
+void	populate_last_feast(t_philo *philo)
+{
+	pthread_mutex_lock(philo->feast_mutex);
+	philo->last_feast = get_time();
+	pthread_mutex_unlock(philo->feast_mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:57:27 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/08 16:21:08 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/09 13:36:55 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_philo
 	t_data			*data;
 	uint64_t		time;
 	int				full;
+	pthread_mutex_t	*meal_mutex;
+	pthread_mutex_t	*feast_mutex;
 }	t_philo;
 
 typedef struct s_data
@@ -54,12 +56,17 @@ typedef struct s_data
 	int				full_philo;
 	int				kill_switch;
 	pthread_mutex_t	switch_mutex;
+	pthread_mutex_t	*meal_mutex;
+	pthread_mutex_t	*feast_mutex;
 }	t_data;
 
 //// PHILO ////
 
-int			retrieve_data(t_data *data, char **av);
 void		*routine(void *param);
+int			manage_thread(t_data *data);
+
+//// PARSING ////
+
 int			ft_atoi(const char *str);
 size_t		ft_strlen(const char *str);
 long		ft_atol(const char *str);
@@ -68,6 +75,7 @@ int			parsing_error(int ac, char **av);
 
 //// INIT ////
 
+int			initialize_mutex(t_data *data);
 int			retrieve_data(t_data *data, char **av);
 void		init_philo(t_philo *philo, t_data *data, int i);
 
@@ -75,6 +83,7 @@ void		init_philo(t_philo *philo, t_data *data, int i);
 
 uint64_t	get_time(void);
 void		custom_usleep(uint64_t input_time, t_philo *philo);
+void		populate_last_feast(t_philo *philo);
 
 //// ACTIONS ////
 

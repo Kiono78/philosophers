@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:50:50 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/08 16:51:27 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/09 10:49:59 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	*routine(void *param)
 	philo = (t_philo *)param;
 	if ((philo->id % 2) == 0)
 	{
-		philo->time = get_time();
 		print_action(philo, THINKING);
 		usleep(philo->data->time_to_eat * 1000);
 	}
