@@ -6,7 +6,7 @@
 #    By: bterral <bterral@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/07 11:30:47 by bterral           #+#    #+#              #
-#    Updated: 2022/03/08 16:31:03 by bterral          ###   ########.fr        #
+#    Updated: 2022/03/09 15:16:35 by bterral          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,10 @@ RM			= rm -f
 
 all: $(NAME)
 
-$(NAME): $(OBJS) Makefile
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.c $(INCLUDES)
+%.o: %.c $(INCLUDES) Makefile
 	$(CC) $(CFLAGS) -I . -c $< -o $@
 
 clean:
