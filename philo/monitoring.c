@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 10:39:16 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/09 13:34:52 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/09 14:19:07 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	thread_end(t_philo *philo)
 		pthread_mutex_unlock(&philo->data->switch_mutex);
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->data->switch_mutex);
 	return (0);
 }
 

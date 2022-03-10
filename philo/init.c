@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 11:46:36 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/09 13:19:13 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/10 14:11:01 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	initialize_mutex(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i++ < data->nb_philo)
+	while (i < data->nb_philo)
 	{
 		if (pthread_mutex_init(&data->fork[i], NULL) != 0)
 			return (free_and_error(data));
@@ -25,9 +25,11 @@ int	initialize_mutex(t_data *data)
 			return (free_and_error(data));
 		if (pthread_mutex_init(&data->feast_mutex[i], NULL) != 0)
 			return (free_and_error(data));
+		i++;
 	}
 	if (pthread_mutex_init(&data->switch_mutex, NULL) != 0)
 		return (free_and_error(data));
+	pthread_mutex_init(&data->switch_mutex, NULL);
 	return (0);
 }
 

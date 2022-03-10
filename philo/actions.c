@@ -6,7 +6,7 @@
 /*   By: bterral <bterral@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 09:38:32 by bterral           #+#    #+#             */
-/*   Updated: 2022/03/09 13:11:33 by bterral          ###   ########.fr       */
+/*   Updated: 2022/03/10 14:10:15 by bterral          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int	print_action(t_philo *philo, int action)
 	else if (action == DIED)
 		printf("%llu %d died\n",
 			philo->time - philo->data->start_ms, philo->id);
+	pthread_mutex_unlock(&philo->data->switch_mutex);
 	return (0);
 }
